@@ -1,0 +1,22 @@
+{
+  "name": "raf-js",
+  "version": "0.1.0",
+  "description": "a better rAF api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JosephClay/raf-js.git"
+  },
+  "author": "Joseph Clay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JosephClay/raf-js/issues"
+  },
+  "homepage": "https://github.com/JosephClay/raf-js",
+  "dependencies": {
+    "signal-js": "^0.1.0"
+  }
+}
