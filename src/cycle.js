@@ -50,7 +50,7 @@ var cycle = function(queue, time) {
     var idx = 0,
         length = queue.length,
         fn;
-    
+
     // early return
     if (!length) { return; }
 
@@ -76,8 +76,13 @@ api.tick = function(time) {
 
     return api;
 };
+
+var loop = function() {
+    api.tick();
+    id = requestAnimationFrame(loop);
+};
 api.start = function() {
-    id = requestAnimationFrame(api.tick);
+    loop();
     return api;
 };
 api.stop = function() {
