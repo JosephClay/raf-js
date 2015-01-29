@@ -18,7 +18,7 @@ var Framerate = module.exports = signal.extend(function(opts) {
     var self = this;
 
     // this._then;
-    // this._active;
+    // this._isActive;
     self.tick = self.tick.bind(self);
     self.interval = DEFAULT_INTERVAL; // 60fps
     self.e = {};
@@ -41,8 +41,8 @@ var Framerate = module.exports = signal.extend(function(opts) {
 
     start: function() {
         var self = this;
-        if (self._active) { return self; }
-        self._active = true;
+        if (self._isActive) { return self; }
+        self._isActive = true;
 
         cycle.add(self.tick);
 
@@ -53,7 +53,7 @@ var Framerate = module.exports = signal.extend(function(opts) {
 
     stop: function() {
         var self = this;
-        self._active = false;
+        self._isActive = false;
 
         cycle.remove(self.tick);
 
