@@ -102,6 +102,11 @@ var Framerate = module.exports = signal.extend(function(opts) {
         var self = this;
         self.interval = interval;
         return self;
+    },
+
+    addTo: function(raf) {
+        if (raf) { raf.add(this.tick); }
+        return this;
     }
 });
 
