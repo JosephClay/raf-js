@@ -25,7 +25,7 @@ var Framerate = module.exports = signal.extend(function(opts) {
 
     self._setup(opts);
 }, {
-    _setup: function() {
+    _setup: function(opts) {
         var self = this;
         if (!opts) { return; }
         if (!isNaN(opts)) {
