@@ -68,7 +68,11 @@ api.raf = requestAnimationFrame;
 api.before = addRemove(before);
 api.after = addRemove(after);
 api.tick = function(time) {
-    time = time || Date.now();
+    // time is the time since the start of the page
+    // in some browsers - Date.now in others -
+    // and performance.now in others.
+    // Working off of Date.now for consistency
+    time = Date.now();
 
     cycle(before, time);
     cycle(main, time);
