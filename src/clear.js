@@ -1,3 +1,6 @@
+var cycle = require('./cycle'),
+    util  = require('./util');
+
 module.exports = function(store) {
     return function(id) {
         if (id in store.ids) {
