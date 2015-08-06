@@ -1,9 +1,6 @@
 var signal = require('signal-js');
 var cycle = require('./cycle');
 
-var ONE_SECOND = 1000;
-var DEFAULT_INTERVAL = ONE_SECOND / 60;
-
 /**
  * An easy way to subscribe to a tick with
  * a throttle framerate.
@@ -14,7 +11,7 @@ var DEFAULT_INTERVAL = ONE_SECOND / 60;
  */
 module.exports = function fps(opts) {
     var api = signal();
-    var interval = DEFAULT_INTERVAL; // 60fps
+    var interval = 1000 / 60; // 60fps
     var e = {};
     var running = false;
     var then;
@@ -51,7 +48,7 @@ module.exports = function fps(opts) {
     };
 
     var setFPS = function(fps) {
-        interval = (ONE_SECOND / fps);
+        interval = 1000 / fps;
         return this;
     };
 
