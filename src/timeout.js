@@ -4,6 +4,7 @@ var clear = require('./clear');
 var store = { ids: {} };
 
 module.exports = {
+    clearTimeout: clear(store),
     setTimeout: function(callback, delay) {
         var end = Date.now() + delay,
             id = util.id();
@@ -19,6 +20,5 @@ module.exports = {
         cycle.add(tick);
 
         return id;
-    },
-    clearTimeout: clear(store)
+    }
 };
