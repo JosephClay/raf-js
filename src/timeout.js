@@ -6,8 +6,8 @@ var store = { ids: {} };
 module.exports = {
     clearTimeout: clear(store),
     setTimeout: function(callback, delay) {
-        var end = Date.now() + delay,
-            id = util.id();
+        var end = Date.now() + delay;
+        var id = util.id();
 
         var tick = store.ids[id] = function(time) {
             time = time || Date.now();

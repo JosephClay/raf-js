@@ -4,13 +4,6 @@ module.exports = {
     id: function() {
         return id++;
     },
-    hasSize: function(obj) {
-        if (!obj) { return false; }
-        for (var key in obj) {
-            if (obj[key]) { return true; }
-        }
-        return false;
-    },
 
     extend: function(base) {
         var args = arguments,
