@@ -10,11 +10,12 @@ var win = window,
     lastTime = 0,
     vendors = ['ms', 'moz', 'webkit', 'o'];
 for (var idx = 0; idx < vendors.length && !win.requestAnimationFrame; ++idx) {
-    win.requestAnimationFrame = win[vendors[idx]+'RequestAnimationFrame'];
-    win.cancelAnimationFrame = win[vendors[idx]+'CancelAnimationFrame'] || win[vendors[idx]+'CancelRequestAnimationFrame'];
+    win.requestAnimationFrame = win[vendors[idx] + 'RequestAnimationFrame'];
+    win.cancelAnimationFrame = win[vendors[idx] + 'CancelAnimationFrame'] || win[vendors[idx] + 'CancelRequestAnimationFrame'];
 }
 
 if (!win.requestAnimationFrame) {
+    // keep element here (unused to maintain the correct function length)
     win.requestAnimationFrame = function(callback, element) {
         var currTime   = +(new Date()),
             timeToCall = Math.max(0, 16 - (currTime - lastTime)),

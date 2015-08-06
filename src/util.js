@@ -1,4 +1,5 @@
 var id = 0;
+
 module.exports = {
     id: function() {
         return id++;
@@ -10,6 +11,7 @@ module.exports = {
         }
         return false;
     },
+
     extend: function(base) {
         var args = arguments,
             idx = 1, length = args.length,

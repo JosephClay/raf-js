@@ -1,5 +1,7 @@
-// queues =================================
+var id;
+var api;
 
+// queues =================================
 var before = [],
     main   = [],
     after  = [];
@@ -62,8 +64,7 @@ var cycle = function(queue, time) {
 
 // API =================================
 
-var id,
-    api = module.exports = addRemove(main);
+api = module.exports = addRemove(main);
 api.raf = requestAnimationFrame;
 api.before = addRemove(before);
 api.after = addRemove(after);
