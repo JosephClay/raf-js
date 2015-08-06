@@ -12,61 +12,18 @@ var DEFAULT_INTERVAL = ONE_SECOND / 60;
  * http://codetheory.in/controlling-the-frame-rate-with-requestanimationframe/
  * Main comment preserved in `tick` method
  */
-var Framerate = module.exports = signal.extend(function(opts) {
-    if (!(this instanceof Framerate)) { return new Framerate(opts); }
+module.exports = function fps(opts) {
+    var api = signal();
+    var interval = DEFAULT_INTERVAL; // 60fps
+    var e = {};
+    var running = false;
+    var then;
 
-    var self = this;
-
-    // this._then;
-    // this._isActive;
-    self.tick = self.tick.bind(self);
-    self.interval = DEFAULT_INTERVAL; // 60fps
-    self.e = {};
-
-    self._setup(opts);
-}, {
-    _setup: function(opts) {
-        var self = this;
-        if (!opts) { return; }
-        if (!isNaN(opts)) {
-            return self.setFPS(opts);
-        }
-        if (opts.fps !== undefined) {
-            return self.setFPS(opts.fps);
-        }
-        if (opts.interval !== undefined) {
-            return self.setInterval(opts.interval);
-        }
-    },
-
-    start: function() {
-        var self = this;
-        if (self._isActive) { return self; }
-        self._isActive = true;
-
-        cycle.add(self.tick);
-
-        self._then = Date.now();
-
-        return self;
-    },
-
-    stop: function() {
-        var self = this;
-        self._isActive = false;
-
-        cycle.remove(self.tick);
-
-        return self;
-    },
-
-    tick: function(time) {
+    var tick = function(time) {
         time = time || Date.now();
 
-        var self = this,
-            e = this.e,
-            delta = time - self._then;
-        if (delta > self.interval) {
+        var delta = time - then;
+        if (delta > interval) {
             // update time stuffs
 
             // Just `then = now` is not enough.
@@ -81,35 +38,71 @@ var Framerate = module.exports = signal.extend(function(opts) {
             // by subtracting delta (112) % interval (100).
             // Hope that makes sense.
 
-            self._then = time - (delta % self.interval);
+            then = time - (delta % interval);
 
             e.now = time;
-            e.then = self._then;
+            e.then = then;
             e.delta = delta;
 
-            self.trigger('tick', e);
+            api.trigger('tick', e);
         }
 
-        return self;
-    },
-
-    setFPS: function(fps) {
-        var self = this;
-        self.interval = (ONE_SECOND / fps);
-        return self;
-    },
-    setInterval: function(interval) {
-        var self = this;
-        self.interval = interval;
-        return self;
-    },
-
-    addTo: function(raf) {
-        if (raf) { raf.add(this.tick); }
         return this;
-    }
-});
+    };
 
-Framerate.create = function(config) {
-    return new Framerate(config);
+    var setFPS = function(fps) {
+        interval = (ONE_SECOND / fps);
+        return this;
+    };
+
+    var setInterval = function(interval) {
+        interval = interval;
+        return this;
+    };
+
+    var setup = function(opts) {
+        if (!opts) { return; }
+        if (!isNaN(opts)) {
+            return setFPS(opts);
+        }
+        if (opts.fps !== undefined) {
+            return setFPS(opts.fps);
+        }
+        if (opts.interval !== undefined) {
+            return setInterval(opts.interval);
+        }
+    };
+
+    setup(opts);
+
+    return {
+        tick: tick,
+        setFPS: setFPS,
+        setInterval: setInterval,
+
+        start: function() {
+            if (running) { return this; }
+            running = true;
+
+            cycle.add(tick);
+
+            then = Date.now();
+
+            return this;
+        },
+
+        stop: function() {
+            if (!running) { return this; }
+            running = false;
+
+            cycle.remove(tick);
+
+            return this;
+        },
+
+        addTo: function(raf) {
+            if (raf) { raf.add(tick); }
+            return this;
+        }
+    };
 };
