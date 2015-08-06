@@ -6,7 +6,7 @@
 // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
 // MIT license
 
-var win = window,
+var win = global,
     lastTime = 0,
     vendors = ['ms', 'moz', 'webkit', 'o'];
 for (var idx = 0; idx < vendors.length && !win.requestAnimationFrame; ++idx) {
