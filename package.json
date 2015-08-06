@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/JosephClay/raf-js",
   "dependencies": {
-    "signal-js": "^0.1.1"
+    "signal-js": "^1.0.0"
   }
 }
