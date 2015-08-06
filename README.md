@@ -1,7 +1,7 @@
 raf-js
 ==========
 
-A better rAF api (with polyfill).
+A better rAF api.
 
 `npm install raf-js`
 
@@ -12,15 +12,15 @@ Quickstart
 require('raf-js')
 	// start the stats
 	.before.add(stats.begin)
-    
+
     // add a method to be called every tick
     .add(animate)
     // add a few more methods
     .add([ foo, bar, baz ])
-    
+
     // end the stats
 	.after.add(stats.begin)
-    
+
     // start it up!
     .start();
 ```
@@ -29,23 +29,17 @@ Control fps
 ----------------
 Create a function that only gets called 30 frames-per-second.
 ``` javascript
-var raf = require('raf-js')
-raf.add(
-	raf.fps(30)
-    	.on('tick', doSomething)
-        .tick;
-);
+raf.fps(30)
+	.on('tick', doSomething)
+    .start();
 ```
 
 Or, if it's easier, create a function that only gets called
 every 1 second.
 ``` javascript
-var raf = require('raf-js')
-raf.add(
-	raf.fps({ interval: 1000 })
-    	.on('tick', doSomething)
-        .tick;
-);
+raf.fps({ interval: 1000 })
+	.on('tick', doSomething)
+    .start();
 ```
 
 Manual tick
