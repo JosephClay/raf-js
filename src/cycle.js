@@ -1,3 +1,5 @@
+var requestAnimationFrame = require('./requestAnimationFrame');
+
 var id;
 var api;
 
