@@ -2,9 +2,9 @@ var id;
 var api;
 
 // queues =================================
-var before = [],
-    main   = [],
-    after  = [];
+var before = [];
+var main   = [];
+var after  = [];
 
 // add / remove =================================
 

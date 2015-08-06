@@ -1,8 +1,8 @@
-var signal = require('signal-js'),
-    cycle = require('./cycle'),
+var signal = require('signal-js');
+var cycle = require('./cycle');
 
-    ONE_SECOND = 1000,
-    DEFAULT_INTERVAL = ONE_SECOND / 60;
+var ONE_SECOND = 1000;
+var DEFAULT_INTERVAL = ONE_SECOND / 60;
 
 /**
  * An easy way to subscribe to a tick with

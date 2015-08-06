@@ -1,7 +1,7 @@
-var cycle  = require('./cycle'),
-    util   = require('./util'),
-    clear  = require('./clear'),
-    store  = { ids: {} };
+var cycle  = require('./cycle');
+var util   = require('./util');
+var clear  = require('./clear');
+var store  = { ids: {} };
 
 module.exports = {
     setInterval: function(callback, delay) {

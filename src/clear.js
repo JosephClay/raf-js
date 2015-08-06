@@ -1,5 +1,5 @@
-var cycle = require('./cycle'),
-    util  = require('./util');
+var cycle = require('./cycle');
+var util  = require('./util');
 
 module.exports = function(store) {
     return function(id) {
