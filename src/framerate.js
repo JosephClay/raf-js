@@ -1,3 +1,4 @@
+var _ = require('./util');
 var signal = require('signal-js');
 var cycle = require('./cycle');
 
@@ -72,7 +73,7 @@ module.exports = function fps(opts) {
 
     setup(opts);
 
-    return {
+    return _.extend(api, {
         tick: tick,
         setFPS: setFPS,
         setInterval: setInterval,
@@ -101,5 +102,5 @@ module.exports = function fps(opts) {
             if (raf) { raf.add(tick); }
             return this;
         }
-    };
+    });
 };
